@@ -1,0 +1,60 @@
+
+{% extends "base.html" %}
+
+{% block title %}Admin Login | Dr. David P. Tokpah{% endblock %}
+
+{% block content %}
+
+<section class="section login-section">
+
+    <div class="login-card">
+
+        <p class="eyebrow">ADMINISTRATION</p>
+
+        <h2>Administrator Login</h2>
+
+        <p>Sign in to manage academic and research content.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+            <button type="submit" class="btn login-button">
+                Sign In
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('home') }}" class="back-link">
+            Return to Homepage
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

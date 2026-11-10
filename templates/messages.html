@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block title %}Contact Messages | Dr. David P. Tokpah{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <h1>Contact Messages</h1>
+
+        <p>
+            <a href="{{ url_for('admin_dashboard') }}">
+                ← Back to Dashboard
+            </a>
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="publication-item">
+
+                    <h3>{{ message.subject or "General Enquiry" }}</h3>
+
+                    <p><strong>From:</strong> {{ message.name }}</p>
+
+                    <p><strong>Email:</strong> {{ message.email }}</p>
+
+                    <p><strong>Message:</strong></p>
+
+                    <p>{{ message.message }}</p>
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('delete_message', message_id=message.id) }}"
+                        onsubmit="return confirm('Delete this message?');"
+                    >
+                        <button type="submit" class="btn delete-button">
+                            Delete Message
+                        </button>
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>You have no contact messages yet.</p>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

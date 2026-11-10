@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Academic and agricultural research profile of Dr. David P. Tokpah.">
+
+    <title>{% block title %}Dr. David P. Tokpah | Agriculture Research{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="{{ url_for('home') }}" class="logo">
+                DAVID <span>TOKPAH</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}#home">Home</a></li>
+                <li><a href="{{ url_for('home') }}#about">About</a></li>
+                <li><a href="{{ url_for('home') }}#research">Research</a>
+		<li><a href="{{ url_for('home') }}#education">Education</a></li>
+		<li><a href="{{ url_for('home') }}#conferences">Conferences</a></li>
+                <li><a href="{{ url_for('home') }}#publications">Publications</a></li>
+                <li><a href="{{ url_for('home') }}#projects">Projects</a></li>
+                <li><a href="{{ url_for('home') }}#contact">Contact</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <h3>Dr. David P. Tokpah</h3>
+
+        <p>Agriculture Research and Development</p>
+
+        <p>
+            &copy; 2026 Dr. David P. Tokpah.
+            All rights reserved.
+        </p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

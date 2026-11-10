@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Publications | Dr. David P. Tokpah{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <h1>Manage Research Publications</h1>
+        <p>Add and manage academic publications.</p>
+
+        <p>
+            <a href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <div class="publication-form">
+            <h2>Add New Publication</h2>
+
+            <form method="POST"
+                  action="{{ url_for('add_publication') }}">
+
+                <label>Publication Title</label>
+                <input type="text" name="title" required>
+
+                <label>Publication Type</label>
+                <select name="publication_type">
+                    <option value="">Select type</option>
+                    <option value="Journal Article">Journal Article</option>
+                    <option value="Conference Paper">Conference Paper</option>
+                    <option value="Review Article">Review Article</option>
+                    <option value="Book Chapter">Book Chapter</option>
+                </select>
+
+                <label>Journal or Publisher</label>
+                <input type="text" name="journal">
+
+                <label>Publication Year</label>
+                <input type="number" name="year" min="1900" max="2100">
+
+                <label>DOI or Publication Link</label>
+                <input type="text" name="doi">
+
+                <button type="submit" class="btn">
+                    Add Publication
+                </button>
+
+            </form>
+        </div>
+
+        <div class="publication-list">
+            <h2>Saved Publications</h2>
+
+            {% if publications %}
+
+                {% for publication in publications %}
+
+                    <div class="publication-item">
+
+                        <h3>{{ publication.title }}</h3>
+
+                        <p>
+                            {{ publication.publication_type or "Publication" }}
+                            | {{ publication.journal or "Publisher not provided" }}
+                            | {{ publication.year or "Year not provided" }}
+                        </p>
+
+                        {% if publication.doi %}
+                            <p>DOI/Link: {{ publication.doi }}</p>
+                        {% endif %}
+
+                        <form method="POST"
+                              action="{{ url_for('delete_publication', publication_id=publication.id) }}"
+                              onsubmit="return confirm('Delete this publication?');">
+
+                            <button type="submit" class="btn delete-button">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No publications have been added yet.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | Dr. David P. Tokpah{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="dashboard-header">
+            <div>
+                <p class="eyebrow">ADMINISTRATION</p>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome to the academic research management system.</p>
+            </div>
+
+            <a href="{{ url_for('admin_logout') }}" class="btn">
+                Logout
+            </a>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+                <h3>Publications</h3>
+                <p class="dashboard-number">{{ publication_count }}</p>
+                <span>Research publications</span>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Research Projects</h3>
+                <p class="dashboard-number">{{ project_count }}</p>
+                <span>Research projects</span>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Achievements</h3>
+                <p class="dashboard-number">{{ achievement_count }}</p>
+                <span>Academic achievements</span>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Messages</h3>
+                <p class="dashboard-number">{{ message_count }}</p>
+                <span>Contact messages</span>
+            </div>
+
+        </div>
+
+        <div class="dashboard-welcome">
+            <h2>Research Website Management</h2>
+            <p>
+                This dashboard will allow the administrator to manage
+                publications, agricultural research projects, academic
+                achievements and website content.
+            </p>
+	    <p>
+            <a href="{{ url_for('admin_publications') }}">
+               Manage Research Publications →
+            </a>
+            </p>
+             <p>
+             <a href="{{ url_for('admin_projects') }}">
+                Manage Research Projects →
+             </a>
+             </p>
+
+<p>
+    <a href="{{ url_for('admin_achievements') }}">
+        Manage Academic Achievements →
+    </a>
+</p>
+
+<p>
+    <a href="{{ url_for('admin_messages') }}">
+        View Contact Messages →
+    </a>
+</p>
+
+<p>
+    <a href="{{ url_for('upload_cv') }}">
+        Manage Academic CV →
+    </a>
+</p>
+            <p><strong>Next:</strong> We will build the content management features.</p>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

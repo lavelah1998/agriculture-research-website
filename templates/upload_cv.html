@@ -1,0 +1,84 @@
+
+{% extends "base.html" %}
+
+{% block title %}Upload Academic CV | Dr. David P. Tokpah{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <h1>Academic CV Management</h1>
+
+        <p>Upload or replace the academic CV in PDF format.</p>
+
+        <p>
+            <a href="{{ url_for('admin_dashboard') }}">
+                ← Back to Dashboard
+            </a>
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="flash {{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <div class="publication-form">
+
+            <h2>Upload CV</h2>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                <label>Select Academic CV (PDF)</label>
+
+                <input
+                    type="file"
+                    name="cv_file"
+                    accept=".pdf,application/pdf"
+                    required
+                >
+
+                <button type="submit" class="btn">
+                    Upload CV
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="publication-list">
+
+            <h2>Current CV</h2>
+
+            {% if cv_files %}
+
+                {% for filename in cv_files %}
+
+                    <p>
+                        {{ filename }}
+                    </p>
+
+                    <a
+                        href="{{ url_for('static', filename='documents/' + filename) }}"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        View or Download CV
+                    </a>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No academic CV has been uploaded yet.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
